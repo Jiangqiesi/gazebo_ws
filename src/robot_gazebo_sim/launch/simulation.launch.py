@@ -1,19 +1,16 @@
 import os
 from launch import LaunchDescription
 from launch.actions import (
-    DeclareLaunchArgument, 
-    IncludeLaunchDescription, 
-    ExecuteProcess,
+    DeclareLaunchArgument,
+    IncludeLaunchDescription,
     TimerAction,
     RegisterEventHandler,
-    AppendEnvironmentVariable,
     SetEnvironmentVariable,
 )
-from launch.event_handlers import OnProcessStart
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, Command
+from launch.event_handlers import OnProcessExit
+from launch.substitutions import LaunchConfiguration, Command
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
 from ament_index_python.packages import get_package_share_directory
 
 
@@ -23,10 +20,6 @@ def generate_launch_description():
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
     pkg_rm_75_description = get_package_share_directory('rm_75_6f_description')
 
-    # Add rm_75_6f_description to GAZEBO_MODEL_PATH
-    # We need to point to the parent directory of the package so Gazebo can find 'rm_75_6f_description'
-    model_path = os.path.dirname(pkg_rm_75_description)
-    
     # 关闭在线模型库（防止 SSL 错误和网络超时）
     set_model_database_uri = SetEnvironmentVariable(
         name='GAZEBO_MODEL_DATABASE_URI',
@@ -36,16 +29,18 @@ def generate_launch_description():
     # 设置系统 Gazebo 模型路径（包含 ground_plane 和 sun）
     gazebo_models_path = '/usr/share/gazebo-11/models'
     home_gazebo_models = os.path.join(os.path.expanduser('~'), '.gazebo', 'models')
-    
+    model_paths = [gazebo_models_path, home_gazebo_models]
+    pkg_model_dirs = [
+        os.path.join(pkg_robot_gazebo_sim, 'models'),
+        os.path.join(pkg_rm_75_description, 'models'),
+    ]
+    for path in pkg_model_dirs:
+        if os.path.isdir(path):
+            model_paths.append(path)
+
     set_gazebo_model_path = SetEnvironmentVariable(
         name='GAZEBO_MODEL_PATH',
-        value=f'{gazebo_models_path}:{home_gazebo_models}'
-    )
-    
-    # 追加 ROS 包模型路径
-    append_ros_model_path = AppendEnvironmentVariable(
-        name='GAZEBO_MODEL_PATH',
-        value=model_path
+        value=':'.join(model_paths)
     )
 
     # Paths
@@ -94,13 +89,6 @@ def generate_launch_description():
     )
 
     # Joint State Publisher (for visualization without controllers)
-    joint_state_publisher = Node(
-        package='joint_state_publisher',
-        executable='joint_state_publisher',
-        name='joint_state_publisher',
-        parameters=[{'use_sim_time': use_sim_time}],
-    )
-
     # Spawn robot in Gazebo - with increased timeout
     spawn_robot = Node(
         package='gazebo_ros',
@@ -115,6 +103,48 @@ def generate_launch_description():
             '-timeout', '120',  # Increase timeout to 120 seconds
         ],
         output='screen'
+    )
+
+    # Spawn controllers after the robot is inserted into Gazebo
+    joint_state_broadcaster_spawner = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=[
+            'joint_state_broadcaster',
+            '--controller-manager', '/controller_manager',
+            '--controller-manager-timeout', '60',
+        ],
+        output='screen',
+    )
+    arm_controller_spawner = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=[
+            'arm_controller',
+            '--controller-manager', '/controller_manager',
+            '--controller-manager-timeout', '60',
+        ],
+        output='screen',
+    )
+    gripper_controller_spawner = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=[
+            'gripper_controller',
+            '--controller-manager', '/controller_manager',
+            '--controller-manager-timeout', '60',
+        ],
+        output='screen',
+    )
+    spawn_controllers = RegisterEventHandler(
+        OnProcessExit(
+            target_action=spawn_robot,
+            on_exit=[
+                joint_state_broadcaster_spawner,
+                arm_controller_spawner,
+                gripper_controller_spawner,
+            ],
+        )
     )
 
     # RViz (optional)
@@ -142,11 +172,10 @@ def generate_launch_description():
         ),
         set_model_database_uri,
         set_gazebo_model_path,
-        append_ros_model_path,
         gzserver,
         gzclient,
         robot_state_publisher,
-        joint_state_publisher,
         delayed_spawn,
+        spawn_controllers,
         # rviz,  # Uncomment to launch RViz automatically
     ])

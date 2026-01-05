@@ -13,6 +13,15 @@
     <color rgba="0.75 0.75 0.75 1"/>
   </material>
 
+  <xacro:property name="rm75_mesh_dir" value="$(find rm_75_6f_description)/meshes"/>
+  <xacro:property name="gripper_mesh_dir" value="$(find robot_gazebo_sim)/meshes/gripper"/>
+
+  <!-- Fixed base to world for stable simulation -->
+  <link name="world"/>
+  <gazebo reference="world">
+    <static>true</static>
+  </gazebo>
+
   <!-- ==================== Base Link ==================== -->
   <link name="base_link">
     <inertial>
@@ -23,17 +32,22 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/base_link.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/base_link.STL"/>
       </geometry>
       <material name="white"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/base_link.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/base_link.STL"/>
       </geometry>
     </collision>
   </link>
+  <joint name="world_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
 
   <!-- RM-75-6F Robot Arm -->
   <!-- Link1 -->
@@ -46,14 +60,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/Link1.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/Link1.STL"/>
       </geometry>
       <material name="white"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/Link1.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/Link1.STL"/>
       </geometry>
     </collision>
   </link>
@@ -75,14 +89,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/Link2.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/Link2.STL"/>
       </geometry>
       <material name="white"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/Link2.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/Link2.STL"/>
       </geometry>
     </collision>
   </link>
@@ -104,14 +118,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/Link3.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/Link3.STL"/>
       </geometry>
       <material name="white"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/Link3.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/Link3.STL"/>
       </geometry>
     </collision>
   </link>
@@ -133,14 +147,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/Link4.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/Link4.STL"/>
       </geometry>
       <material name="white"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/Link4.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/Link4.STL"/>
       </geometry>
     </collision>
   </link>
@@ -162,14 +176,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/Link5.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/Link5.STL"/>
       </geometry>
       <material name="white"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/Link5.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/Link5.STL"/>
       </geometry>
     </collision>
   </link>
@@ -191,14 +205,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/Link6.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/Link6.STL"/>
       </geometry>
       <material name="white"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/Link6.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/Link6.STL"/>
       </geometry>
     </collision>
   </link>
@@ -220,14 +234,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/Link7.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/Link7.STL"/>
       </geometry>
       <material name="white"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://rm_75_6f_description/meshes/Link7.STL"/>
+        <mesh filename="file://${rm75_mesh_dir}/Link7.STL"/>
       </geometry>
     </collision>
   </link>
@@ -250,14 +264,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_gazebo_sim/meshes/gripper/4C2_baselink.STL"/>
+        <mesh filename="file://${gripper_mesh_dir}/4C2_baselink.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_gazebo_sim/meshes/gripper/4C2_baselink.STL"/>
+        <mesh filename="file://${gripper_mesh_dir}/4C2_baselink.STL"/>
       </geometry>
     </collision>
   </link>
@@ -279,14 +293,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_gazebo_sim/meshes/gripper/4C2_Link1.STL"/>
+        <mesh filename="file://${gripper_mesh_dir}/4C2_Link1.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_gazebo_sim/meshes/gripper/4C2_Link1.STL"/>
+        <mesh filename="file://${gripper_mesh_dir}/4C2_Link1.STL"/>
       </geometry>
     </collision>
   </link>
@@ -307,14 +321,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_gazebo_sim/meshes/gripper/4C2_Link5.STL"/>
+        <mesh filename="file://${gripper_mesh_dir}/4C2_Link5.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_gazebo_sim/meshes/gripper/4C2_Link5.STL"/>
+        <mesh filename="file://${gripper_mesh_dir}/4C2_Link5.STL"/>
       </geometry>
     </collision>
   </link>
@@ -336,14 +350,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_gazebo_sim/meshes/gripper/4C2_Link4.STL"/>
+        <mesh filename="file://${gripper_mesh_dir}/4C2_Link4.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_gazebo_sim/meshes/gripper/4C2_Link4.STL"/>
+        <mesh filename="file://${gripper_mesh_dir}/4C2_Link4.STL"/>
       </geometry>
     </collision>
   </link>
@@ -365,14 +379,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_gazebo_sim/meshes/gripper/4C2_Link6.STL"/>
+        <mesh filename="file://${gripper_mesh_dir}/4C2_Link6.STL"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://robot_gazebo_sim/meshes/gripper/4C2_Link6.STL"/>
+        <mesh filename="file://${gripper_mesh_dir}/4C2_Link6.STL"/>
       </geometry>
     </collision>
   </link>

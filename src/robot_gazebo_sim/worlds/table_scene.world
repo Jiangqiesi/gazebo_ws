@@ -9,18 +9,7 @@
       <real_time_update_rate>1000</real_time_update_rate>
     </physics>
 
-    <!-- Gazebo ROS plugins for ROS 2 integration -->
-    <plugin name="gazebo_ros_init" filename="libgazebo_ros_init.so">
-      <ros>
-        <namespace>/</namespace>
-      </ros>
-    </plugin>
-    
-    <plugin name="gazebo_ros_factory" filename="libgazebo_ros_factory.so">
-      <ros>
-        <namespace>/</namespace>
-      </ros>
-    </plugin>
+
     
     <plugin name="gazebo_ros_state" filename="libgazebo_ros_state.so">
       <ros>
