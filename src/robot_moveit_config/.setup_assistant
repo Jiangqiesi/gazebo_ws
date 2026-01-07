@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: robot_gazebo_sim
+    relative_path: urdf/robot_system.urdf.xacro
+  srdf:
+    relative_path: config/rm75_gripper_cameras.srdf
+  package_settings:
+    author_name: my
+    author_email: my@qq.com
+    generated_timestamp: 1767798602
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

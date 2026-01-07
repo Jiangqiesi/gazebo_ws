@@ -3,9 +3,9 @@
      Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot
-  name="EG2-4C2">
+  name="eg2_4c2">
   <link
-    name="4C2_baselink">
+    name="eg2_4c2_baselink">
     <inertial>
       <origin
         xyz="1.5645E-05 -4.1838E-06 0.038"
@@ -26,7 +26,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://EG2-4C2/meshes/4C2_baselink.STL" />
+          filename="package://eg2_4c2_description/meshes/4C2_baselink.STL" />
       </geometry>
       <material
         name="">
@@ -40,12 +40,12 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://EG2-4C2/meshes/4C2_baselink.STL" />
+          filename="package://eg2_4c2_description/meshes/4C2_baselink.STL" />
       </geometry>
     </collision>
   </link>
   <link
-    name="4C2_Link1">
+    name="eg2_4c2_link1">
     <inertial>
       <origin
         xyz="0.0087669 0.009 0.013992"
@@ -66,7 +66,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://EG2-4C2/meshes/4C2_Link1.STL" />
+          filename="package://eg2_4c2_description/meshes/4C2_Link1.STL" />
       </geometry>
       <material
         name="">
@@ -80,20 +80,20 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://EG2-4C2/meshes/4C2_Link1.STL" />
+          filename="package://eg2_4c2_description/meshes/4C2_Link1.STL" />
       </geometry>
     </collision>
   </link>
   <joint
-    name="4C2_Joint1"
+    name="eg2_4c2_joint1"
     type="revolute">
     <origin
       xyz="-0.04 -0.009 0.079"
       rpy="0 0 0" />
     <parent
-      link="4C2_baselink" />
+      link="eg2_4c2_baselink" />
     <child
-      link="4C2_Link1" />
+      link="eg2_4c2_link1" />
     <axis
       xyz="0 -1 0" />
     <limit
@@ -104,7 +104,7 @@
     
   </joint>
   <link
-    name="4C2_Link5">
+    name="eg2_4c2_link5">
     <inertial>
       <origin
         xyz="0.011864 0.006 0.011367"
@@ -125,7 +125,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://EG2-4C2/meshes/4C2_Link5.STL" />
+          filename="package://eg2_4c2_description/meshes/4C2_Link5.STL" />
       </geometry>
       <material
         name="">
@@ -139,20 +139,20 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://EG2-4C2/meshes/4C2_Link5.STL" />
+          filename="package://eg2_4c2_description/meshes/4C2_Link5.STL" />
       </geometry>
     </collision>
   </link>
   <joint
-    name="4C2_Joint5"
+    name="eg2_4c2_joint5"
     type="revolute">
     <origin
       xyz="0.0223 0.003 0.035591"
       rpy="0 0 0" />
     <parent
-      link="4C2_Link1" />
+      link="eg2_4c2_link1" />
     <child
-      link="4C2_Link5" />
+      link="eg2_4c2_link5" />
     <axis
       xyz="0 1 0" />
     <limit
@@ -160,10 +160,10 @@
       upper="0.82"
       effort="1"
       velocity="1" />
-    <mimic joint="4C2_Joint1"/>
+    <mimic joint="eg2_4c2_joint1"/>
   </joint>
   <link
-    name="4C2_Link2">
+    name="eg2_4c2_link2">
     <inertial>
       <origin
         xyz="0.0087435 0.009 0.013955"
@@ -184,7 +184,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://EG2-4C2/meshes/4C2_Link2.STL" />
+          filename="package://eg2_4c2_description/meshes/4C2_Link2.STL" />
       </geometry>
       <material
         name="">
@@ -198,20 +198,20 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://EG2-4C2/meshes/4C2_Link2.STL" />
+          filename="package://eg2_4c2_description/meshes/4C2_Link2.STL" />
       </geometry>
     </collision>
   </link>
   <joint
-    name="4C2_Joint2"
+    name="eg2_4c2_joint2"
     type="revolute">
     <origin
       xyz="-0.03 -0.009 0.081"
       rpy="0 0 0" />
     <parent
-      link="4C2_baselink" />
+      link="eg2_4c2_baselink" />
     <child
-      link="4C2_Link2" />
+      link="eg2_4c2_link2" />
     <axis
       xyz="0 -1 0" />
     <limit
@@ -219,10 +219,10 @@
       upper="0.82"
       effort="1"
       velocity="1" />
-    <mimic joint="4C2_Joint1"/>
+    <mimic joint="eg2_4c2_joint1"/>
   </joint>
   <link
-    name="4C2_Link3">
+    name="eg2_4c2_link3">
     <inertial>
       <origin
         xyz="-0.0087435 0.009 0.013955"
@@ -243,7 +243,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://EG2-4C2/meshes/4C2_Link3.STL" />
+          filename="package://eg2_4c2_description/meshes/4C2_Link3.STL" />
       </geometry>
       <material
         name="">
@@ -257,20 +257,20 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://EG2-4C2/meshes/4C2_Link3.STL" />
+          filename="package://eg2_4c2_description/meshes/4C2_Link3.STL" />
       </geometry>
     </collision>
   </link>
   <joint
-    name="4C2_Joint3"
+    name="eg2_4c2_joint3"
     type="revolute">
     <origin
       xyz="0.03 -0.009 0.081"
       rpy="0 0 0" />
     <parent
-      link="4C2_baselink" />
+      link="eg2_4c2_baselink" />
     <child
-      link="4C2_Link3" />
+      link="eg2_4c2_link3" />
     <axis
       xyz="0 -1 0" />
     <limit
@@ -278,10 +278,10 @@
       upper="0"
       effort="1"
       velocity="1" />
-    <mimic joint="4C2_Joint1" multiplier="-1"  offset="0"/>
+    <mimic joint="eg2_4c2_joint1" multiplier="-1"  offset="0"/>
   </joint>
   <link
-    name="4C2_Link4">
+    name="eg2_4c2_link4">
     <inertial>
       <origin
         xyz="-0.0087669 0.009 0.013992"
@@ -302,7 +302,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://EG2-4C2/meshes/4C2_Link4.STL" />
+          filename="package://eg2_4c2_description/meshes/4C2_Link4.STL" />
       </geometry>
       <material
         name="">
@@ -316,20 +316,20 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://EG2-4C2/meshes/4C2_Link4.STL" />
+          filename="package://eg2_4c2_description/meshes/4C2_Link4.STL" />
       </geometry>
     </collision>
   </link>
   <joint
-    name="4C2_Joint4"
+    name="eg2_4c2_joint4"
     type="revolute">
     <origin
       xyz="0.04 -0.009 0.079"
       rpy="0 0 0" />
     <parent
-      link="4C2_baselink" />
+      link="eg2_4c2_baselink" />
     <child
-      link="4C2_Link4" />
+      link="eg2_4c2_link4" />
     <axis
       xyz="0 -1 0" />
     <limit
@@ -337,10 +337,10 @@
       upper="0"
       effort="1"
       velocity="1" />
-    <mimic joint="4C2_Joint1" multiplier="-1"  offset="0"/>
+    <mimic joint="eg2_4c2_joint1" multiplier="-1"  offset="0"/>
   </joint>
   <link
-    name="4C2_Link6">
+    name="eg2_4c2_link6">
     <inertial>
       <origin
         xyz="-0.011864 0.006 0.011367"
@@ -361,7 +361,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://EG2-4C2/meshes/4C2_Link6.STL" />
+          filename="package://eg2_4c2_description/meshes/4C2_Link6.STL" />
       </geometry>
       <material
         name="">
@@ -375,20 +375,20 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://EG2-4C2/meshes/4C2_Link6.STL" />
+          filename="package://eg2_4c2_description/meshes/4C2_Link6.STL" />
       </geometry>
     </collision>
   </link>
   <joint
-    name="4C2_Joint6"
+    name="eg2_4c2_joint6"
     type="revolute">
     <origin
       xyz="-0.0223 0.003 0.035591"
       rpy="0 0 0" />
     <parent
-      link="4C2_Link4" />
+      link="eg2_4c2_link4" />
     <child
-      link="4C2_Link6" />
+      link="eg2_4c2_link6" />
     <axis
       xyz="0 -1 0" />
     <limit
@@ -396,11 +396,11 @@
       upper="0.82"
       effort="1"
       velocity="1" />
-    <mimic joint="4C2_Joint1"/>
+    <mimic joint="eg2_4c2_joint1"/>
   </joint>
   <transmission name="gripper_finger1_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="4C2_Joint1">
+    <joint name="eg2_4c2_joint1">
       <hardwareInterface>PositionJointInterface</hardwareInterface>
     </joint>
     <actuator name="gripper_finger1_motor">
