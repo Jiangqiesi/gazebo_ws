@@ -120,7 +120,7 @@ def generate_launch_description():
         package='controller_manager',
         executable='spawner',
         arguments=[
-            'arm_controller',
+            'robot_arm_controller',
             '--controller-manager', '/controller_manager',
             '--controller-manager-timeout', '60',
         ],
@@ -130,7 +130,7 @@ def generate_launch_description():
         package='controller_manager',
         executable='spawner',
         arguments=[
-            'gripper_controller',
+            'robot_hand_controller',
             '--controller-manager', '/controller_manager',
             '--controller-manager-timeout', '60',
         ],

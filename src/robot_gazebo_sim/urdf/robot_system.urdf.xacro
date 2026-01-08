@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rm75_gripper_cameras">
+  <xacro:arg name="use_gazebo_control" default="true"/>
 
   <!-- Include component xacro files -->
   <xacro:include filename="$(find robot_gazebo_sim)/urdf/realsense_d405.urdf.xacro"/>
@@ -410,83 +411,85 @@
   </xacro:realsense_d435>
 
   <!-- ==================== ROS2 Control ==================== -->
-  <ros2_control name="GazeboSystem" type="system">
-    <hardware>
-      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
-    </hardware>
-    
-    <joint name="joint1">
-      <command_interface name="position">
-        <param name="min">-3.107</param>
-        <param name="max">3.107</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="joint2">
-      <command_interface name="position">
-        <param name="min">-2.269</param>
-        <param name="max">2.269</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="joint3">
-      <command_interface name="position">
-        <param name="min">-3.107</param>
-        <param name="max">3.107</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="joint4">
-      <command_interface name="position">
-        <param name="min">-2.356</param>
-        <param name="max">2.356</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="joint5">
-      <command_interface name="position">
-        <param name="min">-3.107</param>
-        <param name="max">3.107</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="joint6">
-      <command_interface name="position">
-        <param name="min">-2.234</param>
-        <param name="max">2.234</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="joint7">
-      <command_interface name="position">
-        <param name="min">-6.283</param>
-        <param name="max">6.283</param>
-      </command_interface>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
+  <xacro:if value="${xacro.arg('use_gazebo_control')}">
+    <ros2_control name="GazeboSystem" type="system">
+      <hardware>
+        <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+      </hardware>
 
-    <joint name="gripper_finger1_joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-  </ros2_control>
+      <joint name="joint1">
+        <command_interface name="position">
+          <param name="min">-3.107</param>
+          <param name="max">3.107</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="joint2">
+        <command_interface name="position">
+          <param name="min">-2.269</param>
+          <param name="max">2.269</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="joint3">
+        <command_interface name="position">
+          <param name="min">-3.107</param>
+          <param name="max">3.107</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="joint4">
+        <command_interface name="position">
+          <param name="min">-2.356</param>
+          <param name="max">2.356</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="joint5">
+        <command_interface name="position">
+          <param name="min">-3.107</param>
+          <param name="max">3.107</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="joint6">
+        <command_interface name="position">
+          <param name="min">-2.234</param>
+          <param name="max">2.234</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="joint7">
+        <command_interface name="position">
+          <param name="min">-6.283</param>
+          <param name="max">6.283</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
 
-  <!-- ==================== Gazebo Properties ==================== -->
-  <gazebo>
-    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-      <robot_param>robot_description</robot_param>
-      <robot_param_node>robot_state_publisher</robot_param_node>
-      <parameters>$(find robot_gazebo_sim)/config/controllers.yaml</parameters>
-    </plugin>
-  </gazebo>
+      <joint name="gripper_finger1_joint">
+        <command_interface name="position"/>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+    </ros2_control>
+
+    <!-- ==================== Gazebo Properties ==================== -->
+    <gazebo>
+      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+        <robot_param>robot_description</robot_param>
+        <robot_param_node>robot_state_publisher</robot_param_node>
+        <parameters>$(find robot_gazebo_sim)/config/controllers.yaml</parameters>
+      </plugin>
+    </gazebo>
+  </xacro:if>
 
   <!-- Arm joint Gazebo properties -->
   <gazebo reference="base_link">

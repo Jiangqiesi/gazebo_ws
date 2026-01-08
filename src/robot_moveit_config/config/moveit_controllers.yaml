@@ -9,6 +9,7 @@ moveit_simple_controller_manager:
 
   robot_arm_controller:
     type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory # 必须指定Action接口命名空间
     joints:
       - joint1
       - joint2

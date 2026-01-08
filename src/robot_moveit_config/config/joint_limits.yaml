@@ -10,56 +10,56 @@ default_acceleration_scaling_factor: 0.1
 joint_limits:
   gripper_finger1_joint:
     has_velocity_limits: true
-    max_velocity: 1
+    max_velocity: 1.0
     has_acceleration_limits: false
-    max_acceleration: 0
+    max_acceleration: 0.0
   gripper_finger1_tip_joint:
     has_velocity_limits: true
-    max_velocity: 1
+    max_velocity: 1.0
     has_acceleration_limits: false
-    max_acceleration: 0
+    max_acceleration: 0.0
   gripper_finger2_joint:
     has_velocity_limits: true
-    max_velocity: 1
+    max_velocity: 1.0
     has_acceleration_limits: false
-    max_acceleration: 0
+    max_acceleration: 0.0
   gripper_finger2_tip_joint:
     has_velocity_limits: true
-    max_velocity: 1
+    max_velocity: 1.0
     has_acceleration_limits: false
-    max_acceleration: 0
+    max_acceleration: 0.0
   joint1:
     has_velocity_limits: true
-    max_velocity: 1
+    max_velocity: 1.0
     has_acceleration_limits: false
-    max_acceleration: 0
+    max_acceleration: 0.0
   joint2:
     has_velocity_limits: true
-    max_velocity: 1
+    max_velocity: 1.0
     has_acceleration_limits: false
-    max_acceleration: 0
+    max_acceleration: 0.0
   joint3:
     has_velocity_limits: true
-    max_velocity: 1
+    max_velocity: 1.0
     has_acceleration_limits: false
-    max_acceleration: 0
+    max_acceleration: 0.0
   joint4:
     has_velocity_limits: true
-    max_velocity: 1
+    max_velocity: 1.0
     has_acceleration_limits: false
-    max_acceleration: 0
+    max_acceleration: 0.0
   joint5:
     has_velocity_limits: true
-    max_velocity: 1
+    max_velocity: 1.0
     has_acceleration_limits: false
-    max_acceleration: 0
+    max_acceleration: 0.0
   joint6:
     has_velocity_limits: true
-    max_velocity: 1
+    max_velocity: 1.0
     has_acceleration_limits: false
-    max_acceleration: 0
+    max_acceleration: 0.0
   joint7:
     has_velocity_limits: true
-    max_velocity: 1
+    max_velocity: 1.0
     has_acceleration_limits: false
-    max_acceleration: 0
+    max_acceleration: 0.0
