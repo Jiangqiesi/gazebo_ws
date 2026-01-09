@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rm75_gripper_cameras">
-  <xacro:arg name="use_gazebo_control" default="true"/>
 
   <!-- Include component xacro files -->
   <xacro:include filename="$(find robot_gazebo_sim)/urdf/realsense_d405.urdf.xacro"/>
@@ -313,6 +312,36 @@
     <limit lower="0" upper="0.82" effort="1" velocity="1"/>
   </joint>
 
+  <!-- Auxiliary link for finger1 (uses unused 4C2_Link2 mesh) -->
+  <link name="gripper_finger1_link2">
+    <inertial>
+      <origin xyz="0.0087435 0.009 0.013955" rpy="0 0 0"/>
+      <mass value="0.0038971"/>
+      <inertia ixx="5.6941E-07" ixy="-1.0711E-18" ixz="-2.6891E-07" iyy="6.2305E-07" iyz="-1.6845E-18" izz="3.0871E-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://${gripper_mesh_dir}/4C2_Link2.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://${gripper_mesh_dir}/4C2_Link2.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="gripper_finger1_link2_joint" type="revolute">
+    <origin xyz="-0.03 -0.009 0.081" rpy="0 0 0"/>
+    <parent link="gripper_base_link"/>
+    <child link="gripper_finger1_link2"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="0" upper="0.82" effort="1" velocity="1"/>
+    <mimic joint="gripper_finger1_joint"/>
+  </joint>
+
   <link name="gripper_finger1_tip_link">
     <inertial>
       <origin xyz="0.011864 0.006 0.011367" rpy="0 0 0"/>
@@ -338,6 +367,7 @@
     <parent link="gripper_finger1_link"/>
     <child link="gripper_finger1_tip_link"/>
     <axis xyz="0 1 0"/>
+    <dynamics damping="1.0" friction="0.2"/>
     <limit lower="0" upper="0.82" effort="1" velocity="1"/>
     <mimic joint="gripper_finger1_joint"/>
   </joint>
@@ -371,6 +401,36 @@
     <mimic joint="gripper_finger1_joint" multiplier="-1" offset="0"/>
   </joint>
 
+  <!-- Auxiliary link for finger2 (uses unused 4C2_Link3 mesh) -->
+  <link name="gripper_finger2_link3">
+    <inertial>
+      <origin xyz="-0.0087435 0.009 0.013955" rpy="0 0 0"/>
+      <mass value="0.0038971"/>
+      <inertia ixx="5.6941E-07" ixy="1.0666E-18" ixz="2.6891E-07" iyy="6.2305E-07" iyz="-1.8084E-18" izz="3.0871E-07"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://${gripper_mesh_dir}/4C2_Link3.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://${gripper_mesh_dir}/4C2_Link3.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="gripper_finger2_link3_joint" type="revolute">
+    <origin xyz="0.03 -0.009 0.081" rpy="0 0 0"/>
+    <parent link="gripper_base_link"/>
+    <child link="gripper_finger2_link3"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="-0.82" upper="0" effort="1" velocity="1"/>
+    <mimic joint="gripper_finger1_joint" multiplier="-1" offset="0"/>
+  </joint>
+
   <link name="gripper_finger2_tip_link">
     <inertial>
       <origin xyz="-0.011864 0.006 0.011367" rpy="0 0 0"/>
@@ -396,6 +456,7 @@
     <parent link="gripper_finger2_link"/>
     <child link="gripper_finger2_tip_link"/>
     <axis xyz="0 -1 0"/>
+    <dynamics damping="1.0" friction="0.2"/>
     <limit lower="0" upper="0.82" effort="1" velocity="1"/>
     <mimic joint="gripper_finger1_joint"/>
   </joint>
@@ -410,86 +471,7 @@
     <origin xyz="-0.4 0.8 0.45" rpy="0 0.6 ${-pi/2}"/>
   </xacro:realsense_d435>
 
-  <!-- ==================== ROS2 Control ==================== -->
-  <xacro:if value="${xacro.arg('use_gazebo_control')}">
-    <ros2_control name="GazeboSystem" type="system">
-      <hardware>
-        <plugin>gazebo_ros2_control/GazeboSystem</plugin>
-      </hardware>
-
-      <joint name="joint1">
-        <command_interface name="position">
-          <param name="min">-3.107</param>
-          <param name="max">3.107</param>
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
-      </joint>
-      <joint name="joint2">
-        <command_interface name="position">
-          <param name="min">-2.269</param>
-          <param name="max">2.269</param>
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
-      </joint>
-      <joint name="joint3">
-        <command_interface name="position">
-          <param name="min">-3.107</param>
-          <param name="max">3.107</param>
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
-      </joint>
-      <joint name="joint4">
-        <command_interface name="position">
-          <param name="min">-2.356</param>
-          <param name="max">2.356</param>
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
-      </joint>
-      <joint name="joint5">
-        <command_interface name="position">
-          <param name="min">-3.107</param>
-          <param name="max">3.107</param>
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
-      </joint>
-      <joint name="joint6">
-        <command_interface name="position">
-          <param name="min">-2.234</param>
-          <param name="max">2.234</param>
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
-      </joint>
-      <joint name="joint7">
-        <command_interface name="position">
-          <param name="min">-6.283</param>
-          <param name="max">6.283</param>
-        </command_interface>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
-      </joint>
-
-      <joint name="gripper_finger1_joint">
-        <command_interface name="position"/>
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
-      </joint>
-    </ros2_control>
-
-    <!-- ==================== Gazebo Properties ==================== -->
-    <gazebo>
-      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-        <robot_param>robot_description</robot_param>
-        <robot_param_node>robot_state_publisher</robot_param_node>
-        <parameters>$(find robot_gazebo_sim)/config/controllers.yaml</parameters>
-      </plugin>
-    </gazebo>
-  </xacro:if>
+  <!-- Note:ros2_control and Gazebo control plugins are defined in robot_moveit_config -->
 
   <!-- Arm joint Gazebo properties -->
   <gazebo reference="base_link">
@@ -528,12 +510,18 @@
     <mu1>1.0</mu1>
     <mu2>1.0</mu2>
   </gazebo>
+  <gazebo reference="gripper_finger1_link2">
+    <material>Gazebo/Grey</material>
+  </gazebo>
   <gazebo reference="gripper_finger2_link">
     <material>Gazebo/Grey</material>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
     <mu1>1.0</mu1>
     <mu2>1.0</mu2>
+  </gazebo>
+  <gazebo reference="gripper_finger2_link3">
+    <material>Gazebo/Grey</material>
   </gazebo>
 
 </robot>

@@ -13,11 +13,7 @@
         <chain base_link="base_link" tip_link="Link7"/>
     </group>
     <group name="robot_hand">
-        <joint name="arm_to_gripper"/>
         <joint name="gripper_finger1_joint"/>
-        <joint name="gripper_finger1_tip_joint"/>
-        <joint name="gripper_finger2_joint"/>
-        <joint name="gripper_finger2_tip_joint"/>
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
     <group_state name="home" group="robot_arm">
@@ -31,9 +27,19 @@
     </group_state>
     <group_state name="home_hand" group="robot_hand">
         <joint name="gripper_finger1_joint" value="0.82"/>
+        <joint name="gripper_finger1_link2_joint" value="0.82"/>
+        <joint name="gripper_finger1_tip_joint" value="0.82"/>
+        <joint name="gripper_finger2_joint" value="-0.82"/>
+        <joint name="gripper_finger2_link3_joint" value="-0.82"/>
+        <joint name="gripper_finger2_tip_joint" value="0.82"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="hand" parent_link="Link7" group="robot_hand"/>
+    <passive_joint name="gripper_finger1_link2_joint"/>
+    <passive_joint name="gripper_finger1_tip_joint"/>
+    <passive_joint name="gripper_finger2_joint"/>
+    <passive_joint name="gripper_finger2_link3_joint"/>
+    <passive_joint name="gripper_finger2_tip_joint"/>
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <virtual_joint name="virtual_joint" type="fixed" parent_frame="world" child_link="base_link"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->

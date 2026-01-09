@@ -8,17 +8,18 @@ from launch.actions import (
     SetEnvironmentVariable,
 )
 from launch.event_handlers import OnProcessExit
-from launch.substitutions import LaunchConfiguration, Command
+from launch.substitutions import LaunchConfiguration, Command, PathJoinSubstitution
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
+from launch_ros.substitutions import FindPackageShare
 from ament_index_python.packages import get_package_share_directory
 
 
 def generate_launch_description():
     # Package directories
-    pkg_robot_gazebo_sim = get_package_share_directory('robot_gazebo_sim')
+    pkg_moveit_config = get_package_share_directory('robot_moveit_config')
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
-    pkg_rm_75_description = get_package_share_directory('rm_75_6f_description')
 
     # 关闭在线模型库（防止 SSL 错误和网络超时）
     set_model_database_uri = SetEnvironmentVariable(
@@ -26,41 +27,49 @@ def generate_launch_description():
         value=''
     )
     
-    # 设置系统 Gazebo 模型路径（包含 ground_plane 和 sun）
+    # 设置系统 Gazebo 模型路径
     gazebo_models_path = '/usr/share/gazebo-11/models'
     home_gazebo_models = os.path.join(os.path.expanduser('~'), '.gazebo', 'models')
     model_paths = [gazebo_models_path, home_gazebo_models]
-    pkg_model_dirs = [
-        os.path.join(pkg_robot_gazebo_sim, 'models'),
-        os.path.join(pkg_rm_75_description, 'models'),
-    ]
-    for path in pkg_model_dirs:
-        if os.path.isdir(path):
-            model_paths.append(path)
 
     set_gazebo_model_path = SetEnvironmentVariable(
         name='GAZEBO_MODEL_PATH',
-        value=':'.join(model_paths)
+        value=':'.join([p for p in model_paths if os.path.isdir(p)])
     )
 
     # Paths
-    urdf_file = os.path.join(pkg_robot_gazebo_sim, 'urdf', 'robot_system.urdf.xacro')
-    world_file = os.path.join(pkg_robot_gazebo_sim, 'worlds', 'table_scene.world')
-    rviz_config = os.path.join(pkg_robot_gazebo_sim, 'config', 'display.rviz')
+    urdf_xacro = os.path.join(pkg_moveit_config, 'config', 'rm75_gripper_cameras.urdf.xacro')
+    controllers_file = os.path.join(pkg_moveit_config, 'config', 'ros2_controllers.yaml')
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     
-    # Robot description from xacro
-    robot_description = Command(['xacro ', urdf_file])
+    # # Robot description from xacro - configured for Gazebo
+    # xacro_command = (
+    #     f'xacro {urdf_xacro} use_fake_hardware:=false use_gazebo:=true '
+    #     f'gazebo_controllers_file:={controllers_file}'
+    # )
+    # robot_description = Command([
+    #     f"bash -c \"{xacro_command} | tr -d '\\n'\""
+    # ])
+    # robot_description_param = ParameterValue(robot_description, value_type=str)
 
-    # Gazebo server
+    # Robot description from xacro - configured for Gazebo
+    # 修改：直接使用 Command 调用 xacro，不使用 bash 和 tr 去除换行符。
+    # tr -d '\n' 产生的超长单行字符串会导致 gazebo_ros2_control 参数解析溢出。
+    robot_description = Command([
+        'xacro ', urdf_xacro,
+        ' use_fake_hardware:=false use_gazebo:=true ',
+        ' gazebo_controllers_file:=', controllers_file
+    ])
+    robot_description_param = ParameterValue(robot_description, value_type=None)
+
+    # Gazebo server (empty world)
     gzserver = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_gazebo_ros, 'launch', 'gzserver.launch.py')
         ),
         launch_arguments={
-            'world': world_file,
             'verbose': 'true',
             'pause': 'false',
         }.items()
@@ -83,13 +92,12 @@ def generate_launch_description():
         name='robot_state_publisher',
         output='screen',
         parameters=[{
-            'robot_description': robot_description,
+            'robot_description': robot_description_param,
             'use_sim_time': use_sim_time,
         }]
     )
 
-    # Joint State Publisher (for visualization without controllers)
-    # Spawn robot in Gazebo - with increased timeout
+    # Spawn robot in Gazebo
     spawn_robot = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
@@ -100,7 +108,7 @@ def generate_launch_description():
             '-x', '0.4',
             '-y', '0.0',
             '-z', '0.75',
-            '-timeout', '120',  # Increase timeout to 120 seconds
+            '-timeout', '120',
         ],
         output='screen'
     )
@@ -147,20 +155,9 @@ def generate_launch_description():
         )
     )
 
-    # RViz (optional)
-    rviz = Node(
-        package='rviz2',
-        executable='rviz2',
-        name='rviz2',
-        arguments=['-d', rviz_config] if os.path.exists(rviz_config) else [],
-        parameters=[{'use_sim_time': use_sim_time}],
-        output='screen',
-        condition=None  # Always launch for debugging
-    )
-
     # Delay spawn_robot to give Gazebo time to fully initialize
     delayed_spawn = TimerAction(
-        period=10.0,  # Wait 10 seconds before spawning
+        period=10.0,
         actions=[spawn_robot]
     )
 
@@ -177,5 +174,4 @@ def generate_launch_description():
         robot_state_publisher,
         delayed_spawn,
         spawn_controllers,
-        # rviz,  # Uncomment to launch RViz automatically
     ])

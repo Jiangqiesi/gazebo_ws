@@ -2,18 +2,25 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rm75_gripper_cameras">
     <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
     <xacro:arg name="use_fake_hardware" default="true" />
-    <xacro:arg name="use_gazebo_control" default="false" />
+    <xacro:arg name="use_gazebo" default="false" />
+    <xacro:arg name="gazebo_controllers_file" default="" />
 
-    <!-- Import rm75_gripper_cameras urdf file -->
-    <!-- Pass use_gazebo_control to base URDF to control hardware plugin loading -->
+    <!-- Import robot URDF from description package -->
     <xacro:include filename="$(find robot_gazebo_sim)/urdf/robot_system.urdf.xacro" />
 
-    <!-- Only include fake hardware ros2_control when needed (for MoveIt2 demo without Gazebo) -->
+    <!-- ros2_control for MoveIt2 fake hardware demo (mock hardware) -->
     <xacro:if value="$(arg use_fake_hardware)">
         <xacro:include filename="rm75_gripper_cameras.ros2_control.xacro" />
         <xacro:rm75_gripper_cameras_ros2_control 
             name="FakeSystem" 
             initial_positions_file="$(arg initial_positions_file)"/>
+    </xacro:if>
+
+    <!-- ros2_control for Gazebo simulation -->
+    <xacro:if value="$(arg use_gazebo)">
+        <xacro:include filename="rm75_gripper_cameras.gazebo_ros2_control.xacro" />
+        <xacro:rm75_gripper_cameras_gazebo_ros2_control 
+            controllers_file="$(arg gazebo_controllers_file)"/>
     </xacro:if>
 
 </robot>
