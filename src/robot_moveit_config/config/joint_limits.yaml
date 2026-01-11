@@ -13,21 +13,6 @@ joint_limits:
     max_velocity: 1.0
     has_acceleration_limits: false
     max_acceleration: 0.0
-  gripper_finger1_tip_joint:
-    has_velocity_limits: true
-    max_velocity: 1.0
-    has_acceleration_limits: false
-    max_acceleration: 0.0
-  gripper_finger2_joint:
-    has_velocity_limits: true
-    max_velocity: 1.0
-    has_acceleration_limits: false
-    max_acceleration: 0.0
-  gripper_finger2_tip_joint:
-    has_velocity_limits: true
-    max_velocity: 1.0
-    has_acceleration_limits: false
-    max_acceleration: 0.0
   joint1:
     has_velocity_limits: true
     max_velocity: 1.0

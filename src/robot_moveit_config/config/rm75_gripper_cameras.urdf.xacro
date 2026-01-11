@@ -5,7 +5,7 @@
     <xacro:arg name="use_gazebo" default="false" />
     <xacro:arg name="gazebo_controllers_file" default="" />
 
-    <!-- Import robot URDF from description package -->
+    <!-- Import rm75_gripper_cameras urdf file -->
     <xacro:include filename="$(find robot_gazebo_sim)/urdf/robot_system.urdf.xacro" />
 
     <!-- ros2_control for MoveIt2 fake hardware demo (mock hardware) -->

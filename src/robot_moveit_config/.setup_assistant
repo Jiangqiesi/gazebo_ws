@@ -8,7 +8,7 @@ moveit_setup_assistant_config:
   package_settings:
     author_name: my
     author_email: my@qq.com
-    generated_timestamp: 1767798602
+    generated_timestamp: 1767985485
   control_xacro:
     command:
       - position
