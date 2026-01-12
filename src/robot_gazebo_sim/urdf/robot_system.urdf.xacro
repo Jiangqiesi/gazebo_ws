@@ -364,7 +364,7 @@
     <parent link="gripper_finger1_link"/>
     <child link="gripper_finger1_tip_link"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="1.0" friction="0.2"/>
+    <!-- <dynamics damping="1.0" friction="0.2"/> -->
     <limit lower="0" upper="0.82" effort="1" velocity="1"/>
     <mimic joint="gripper_finger1_joint"/>
   </joint>
@@ -453,9 +453,36 @@
     <parent link="gripper_finger2_link"/>
     <child link="gripper_finger2_tip_link"/>
     <axis xyz="0 -1 0"/>
-    <dynamics damping="1.0" friction="0.2"/>
+    <!-- <dynamics damping="1.0" friction="0.2"/> -->
     <limit lower="0" upper="0.82" effort="1" velocity="1"/>
     <mimic joint="gripper_finger1_joint"/>
+  </joint>
+  
+  <!-- https://github.com/ros-controls/gazebo_ros2_control/issues/173 -->
+  <link name="dummy_child1"/>
+  <link name="dummy_child2"/>
+  <link name="dummy_child3"/>
+  <link name="dummy_child4"/>
+  <link name="dummy_child5"/>
+  <joint name="gripper_finger1_link2_joint_mimic" type="fixed">
+      <parent link="gripper_base_link" />
+      <child link="dummy_child1" />
+  </joint>
+  <joint name="gripper_finger1_tip_joint_mimic" type="fixed">
+      <parent link="gripper_finger1_link" />
+      <child link="dummy_child2" />
+  </joint>
+  <joint name="gripper_finger2_joint_mimic" type="fixed">
+      <parent link="gripper_base_link" />
+      <child link="dummy_child3" />
+  </joint>
+  <joint name="gripper_finger2_link3_joint_mimic" type="fixed">
+      <parent link="gripper_base_link" />
+      <child link="dummy_child4" />
+  </joint>
+  <joint name="gripper_finger2_tip_joint_mimic" type="fixed">
+      <parent link="gripper_finger2_link" />
+      <child link="dummy_child5" />
   </joint>
 
   <!-- ==================== RealSense D405 (Eye-in-Hand) ==================== -->
