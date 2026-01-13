@@ -9,13 +9,6 @@
       <real_time_update_rate>1000</real_time_update_rate>
     </physics>
 
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <ros>
-        <namespace>/</namespace>
-      </ros>
-      <update_rate>50.0</update_rate>
-    </plugin>
-
     <!-- Lighting -->
     <include>
       <uri>model://sun</uri>
@@ -303,61 +296,6 @@
             <ambient>0.8 0.8 0.1 1</ambient>
             <diffuse>1.0 1.0 0.2 1</diffuse>
             <specular>0.3 0.3 0.3 1</specular>
-          </material>
-        </visual>
-      </link>
-    </model>
-
-    <!-- Camera stand for D435 (external camera support) -->
-    <model name="camera_stand">
-      <static>true</static>
-      <pose>0.0 0.8 0 0 0 0</pose>
-      <link name="stand_link">
-        <!-- Vertical pole -->
-        <collision name="pole_collision">
-          <pose>0 0 0.6 0 0 0</pose>
-          <geometry>
-            <cylinder>
-              <radius>0.02</radius>
-              <length>1.2</length>
-            </cylinder>
-          </geometry>
-        </collision>
-        <visual name="pole_visual">
-          <pose>0 0 0.6 0 0 0</pose>
-          <geometry>
-            <cylinder>
-              <radius>0.02</radius>
-              <length>1.2</length>
-            </cylinder>
-          </geometry>
-          <material>
-            <ambient>0.2 0.2 0.2 1</ambient>
-            <diffuse>0.3 0.3 0.3 1</diffuse>
-          </material>
-        </visual>
-        
-        <!-- Base -->
-        <collision name="base_collision">
-          <pose>0 0 0.01 0 0 0</pose>
-          <geometry>
-            <cylinder>
-              <radius>0.1</radius>
-              <length>0.02</length>
-            </cylinder>
-          </geometry>
-        </collision>
-        <visual name="base_visual">
-          <pose>0 0 0.01 0 0 0</pose>
-          <geometry>
-            <cylinder>
-              <radius>0.1</radius>
-              <length>0.02</length>
-            </cylinder>
-          </geometry>
-          <material>
-            <ambient>0.3 0.3 0.3 1</ambient>
-            <diffuse>0.4 0.4 0.4 1</diffuse>
           </material>
         </visual>
       </link>

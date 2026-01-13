@@ -487,12 +487,12 @@
 
   <!-- ==================== RealSense D405 (Eye-in-Hand) ==================== -->
   <xacro:realsense_d405 name="d405" parent="gripper_base_link">
-    <origin xyz="0 0.04 0.04" rpy="0 ${pi/6} ${pi/2}"/>
+    <origin xyz="0 0.04 0.04" rpy="0 ${-pi/2} ${pi/2}"/>
   </xacro:realsense_d405>
 
   <!-- ==================== RealSense D435 (Eye-to-Hand) ==================== -->
   <xacro:realsense_d435 name="d435" parent="base_link">
-    <origin xyz="-0.4 0.8 0.45" rpy="0 0.6 ${-pi/2}"/>
+    <origin xyz="1.2 0 1" rpy="0 0.785398163 ${pi}"/>
   </xacro:realsense_d435>
 
   <!-- Note:ros2_control and Gazebo control plugins are defined in robot_moveit_config -->

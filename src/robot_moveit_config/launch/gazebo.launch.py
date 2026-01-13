@@ -43,6 +43,7 @@ def generate_launch_description():
 
     # Launch arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+    world = LaunchConfiguration('world')
     
     # # Robot description from xacro - configured for Gazebo
     # xacro_command = (
@@ -64,7 +65,9 @@ def generate_launch_description():
     ])
     robot_description_param = ParameterValue(robot_description, value_type=None)
 
-    # Gazebo server (empty world)
+    default_world = os.path.join(pkg_moveit_config, 'gazebo', 'sim_env.world')
+
+    # Gazebo server (custom world)
     gzserver = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_gazebo_ros, 'launch', 'gzserver.launch.py')
@@ -72,6 +75,7 @@ def generate_launch_description():
         launch_arguments={
             'verbose': 'true',
             'pause': 'false',
+            'world': world,
         }.items()
     )
 
@@ -105,9 +109,9 @@ def generate_launch_description():
         arguments=[
             '-topic', 'robot_description',
             '-entity', 'rm75_robot',
-            '-x', '0.4',
+            '-x', '0.3',
             '-y', '0.0',
-            '-z', '0.75',
+            '-z', '1.03',
             '-timeout', '120',
         ],
         output='screen'
@@ -166,6 +170,11 @@ def generate_launch_description():
             'use_sim_time',
             default_value='true',
             description='Use simulation time'
+        ),
+        DeclareLaunchArgument(
+            'world',
+            default_value=default_world,
+            description='Gazebo world file'
         ),
         set_model_database_uri,
         set_gazebo_model_path,

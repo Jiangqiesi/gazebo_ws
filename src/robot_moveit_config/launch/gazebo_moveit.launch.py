@@ -44,6 +44,7 @@ def generate_launch_description():
     # Paths
     urdf_xacro = os.path.join(pkg_moveit_config, 'config', 'rm75_gripper_cameras.urdf.xacro')
     controllers_file = os.path.join(pkg_moveit_config, 'config', 'ros2_controllers.yaml')
+    default_world = os.path.join(pkg_moveit_config, 'gazebo', 'sim_env.world')
     
     # Robot description for Gazebo
     xacro_command = (
@@ -74,6 +75,11 @@ def generate_launch_description():
         description='Use simulation time'
     ))
     ld.add_action(DeclareLaunchArgument(
+        'world',
+        default_value=default_world,
+        description='Gazebo world file'
+    ))
+    ld.add_action(DeclareLaunchArgument(
         'use_rviz',
         default_value='true',
         description='Launch RViz'
@@ -90,7 +96,11 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(pkg_gazebo_ros, 'launch', 'gzserver.launch.py')
         ),
-        launch_arguments={'verbose': 'true', 'pause': 'false'}.items()
+        launch_arguments={
+            'verbose': 'true',
+            'pause': 'false',
+            'world': LaunchConfiguration('world'),
+        }.items()
     ))
 
     # Gazebo client
@@ -118,7 +128,7 @@ def generate_launch_description():
         arguments=[
             '-topic', 'robot_description',
             '-entity', 'rm75_robot',
-            '-x', '0.4', '-y', '0.0', '-z', '0.75',
+            '-x', '0.3', '-y', '0.0', '-z', '1.03',
             '-timeout', '120',
         ],
         output='screen'
