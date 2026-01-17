@@ -61,6 +61,11 @@ def generate_launch_description():
         package_name="robot_moveit_config"
     ).to_moveit_configs()
 
+    octomap_params = {
+        "octomap_frame": "base_link",
+        "octomap_resolution": 0.05,
+    }
+
     # Override robot description with Gazebo-configured version
     robot_description = {
         "robot_description": ParameterValue(robot_description_content, value_type=str)
@@ -167,9 +172,12 @@ def generate_launch_description():
         moveit_config.robot_description_semantic,
         moveit_config.robot_description_kinematics,
         moveit_config.planning_pipelines,
+        moveit_config.planning_scene_monitor,
+        moveit_config.sensors_3d,
         # moveit_config.robot_description_planning,
         moveit_config.trajectory_execution,
         moveit_config.joint_limits,
+        octomap_params,
         {'use_sim_time': True},
     ]
     ld.add_action(Node(
