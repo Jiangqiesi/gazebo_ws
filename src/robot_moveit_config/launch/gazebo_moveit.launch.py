@@ -41,6 +41,24 @@ def generate_launch_description():
         value=':'.join([p for p in model_paths if os.path.isdir(p)])
     )
 
+    # Make local resources and Gazebo shaders resolvable via file://
+    existing_resource_path = os.environ.get('GAZEBO_RESOURCE_PATH', '')
+    candidate_resource_paths = [
+        '/usr/share/gazebo-11',
+        '/usr/share/gazebo',
+        pkg_moveit_config,
+    ]
+    if existing_resource_path:
+        candidate_resource_paths.extend(existing_resource_path.split(':'))
+    resource_paths = []
+    for path in candidate_resource_paths:
+        if path and os.path.isdir(path) and path not in resource_paths:
+            resource_paths.append(path)
+    set_gazebo_resource_path = SetEnvironmentVariable(
+        name='GAZEBO_RESOURCE_PATH',
+        value=':'.join(resource_paths)
+    )
+
     # Paths
     urdf_xacro = os.path.join(pkg_moveit_config, 'config', 'rm75_gripper_cameras.urdf.xacro')
     controllers_file = os.path.join(pkg_moveit_config, 'config', 'ros2_controllers.yaml')
@@ -95,6 +113,7 @@ def generate_launch_description():
     # Environment setup
     ld.add_action(set_model_database_uri)
     ld.add_action(set_gazebo_model_path)
+    ld.add_action(set_gazebo_resource_path)
 
     # Gazebo server
     ld.add_action(IncludeLaunchDescription(

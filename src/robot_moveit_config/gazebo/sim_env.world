@@ -702,7 +702,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0101.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0101.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -713,7 +713,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0101.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0101.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -745,7 +745,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0201.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0201.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -756,7 +756,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0201.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0201.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -788,7 +788,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0204.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0204.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -799,7 +799,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0204.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0204.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -831,7 +831,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0301.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0301.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -842,7 +842,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0301.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0301.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -874,7 +874,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0401.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0401.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -885,7 +885,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0401.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0401.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -917,7 +917,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0601.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0601.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -928,7 +928,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0601.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0601.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -960,7 +960,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0701.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0701.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -971,7 +971,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0701.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0701.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -1003,7 +1003,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0801.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0801.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -1014,7 +1014,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0801.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0801.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -1046,7 +1046,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0802.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0802.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -1057,7 +1057,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file:///home/zhibang22/projects/gazebo_ws/tooling_parts/g0802.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0802.STL</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>

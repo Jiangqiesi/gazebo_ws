@@ -10,8 +10,12 @@ export GAZEBO_MODEL_DATABASE_URI=""
 # - 然后添加本地模型目录（如果有的话）
 export GAZEBO_MODEL_PATH="/usr/share/gazebo-11/models:$HOME/.gazebo/models"
 
-# 3. 添加 ROS 包相关模型路径（在 launch 文件中通过 AppendEnvironmentVariable 动态添加）
+# 3. 设置资源路径（包含 Gazebo shader 与本地资源）
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PKG_RESOURCE_PATH="$SCRIPT_DIR/src/robot_moveit_config"
+GAZEBO_RESOURCE_PATH="/usr/share/gazebo-11:/usr/share/gazebo:${PKG_RESOURCE_PATH}:${GAZEBO_RESOURCE_PATH}"
 
 echo "Gazebo 环境变量已设置:"
 echo "  GAZEBO_MODEL_DATABASE_URI=$GAZEBO_MODEL_DATABASE_URI"
 echo "  GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH"
+echo "  GAZEBO_RESOURCE_PATH=$GAZEBO_RESOURCE_PATH"
