@@ -79,6 +79,18 @@ def generate_launch_description():
         package_name="robot_moveit_config"
     ).to_moveit_configs()
 
+    robot_description_planning = {}
+    if moveit_config.joint_limits:
+        robot_description_planning.update(moveit_config.joint_limits)
+    if moveit_config.pilz_cartesian_limits:
+        merged_limits = dict(
+            robot_description_planning.get("robot_description_planning", {})
+        )
+        merged_limits.update(
+            moveit_config.pilz_cartesian_limits.get("robot_description_planning", {})
+        )
+        robot_description_planning["robot_description_planning"] = merged_limits
+
     octomap_params = {
         "octomap_frame": "base_link",
         "octomap_resolution": 0.05,
@@ -193,9 +205,8 @@ def generate_launch_description():
         moveit_config.planning_pipelines,
         moveit_config.planning_scene_monitor,
         moveit_config.sensors_3d,
-        # moveit_config.robot_description_planning,
         moveit_config.trajectory_execution,
-        moveit_config.joint_limits,
+        robot_description_planning,
         octomap_params,
         {'use_sim_time': True},
     ]
@@ -219,8 +230,7 @@ def generate_launch_description():
             moveit_config.robot_description_semantic,
             moveit_config.planning_pipelines,
             moveit_config.robot_description_kinematics,
-            # moveit_config.robot_description_planning,
-            moveit_config.joint_limits,
+            robot_description_planning,
             {'use_sim_time': True},
         ],
         condition=IfCondition(LaunchConfiguration('use_rviz')),
