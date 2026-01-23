@@ -708,6 +708,12 @@
           </geometry>
           <pose>0 0 0 0 -0 0</pose>
           <cast_shadows>1</cast_shadows>
+          <material>
+            <ambient>0.4 0.4 0.45 1</ambient>
+            <diffuse>0.5 0.5 0.55 1</diffuse>
+            <specular>0.3 0.3 0.3 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
         </visual>
         <collision name='collision'>
           <pose>0 0 0 0 -0 0</pose>
@@ -751,6 +757,12 @@
           </geometry>
           <pose>0 0 0 0 -0 0</pose>
           <cast_shadows>1</cast_shadows>
+          <material>
+            <ambient>0.4 0.4 0.45 1</ambient>
+            <diffuse>0.5 0.5 0.55 1</diffuse>
+            <specular>0.3 0.3 0.3 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
         </visual>
         <collision name='collision'>
           <pose>0 0 0 0 -0 0</pose>
@@ -794,6 +806,12 @@
           </geometry>
           <pose>0 0 0 0 -0 0</pose>
           <cast_shadows>1</cast_shadows>
+          <material>
+            <ambient>0.4 0.4 0.45 1</ambient>
+            <diffuse>0.5 0.5 0.55 1</diffuse>
+            <specular>0.3 0.3 0.3 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
         </visual>
         <collision name='collision'>
           <pose>0 0 0 0 -0 0</pose>
@@ -837,6 +855,12 @@
           </geometry>
           <pose>0 0 0 0 -0 0</pose>
           <cast_shadows>1</cast_shadows>
+          <material>
+            <ambient>0.4 0.4 0.45 1</ambient>
+            <diffuse>0.5 0.5 0.55 1</diffuse>
+            <specular>0.3 0.3 0.3 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
         </visual>
         <collision name='collision'>
           <pose>0 0 0 0 -0 0</pose>
@@ -880,6 +904,12 @@
           </geometry>
           <pose>0 0 0 0 -0 0</pose>
           <cast_shadows>1</cast_shadows>
+          <material>
+            <ambient>0.4 0.4 0.45 1</ambient>
+            <diffuse>0.5 0.5 0.55 1</diffuse>
+            <specular>0.3 0.3 0.3 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
         </visual>
         <collision name='collision'>
           <pose>0 0 0 0 -0 0</pose>
@@ -923,6 +953,12 @@
           </geometry>
           <pose>0 0 0 0 -0 0</pose>
           <cast_shadows>1</cast_shadows>
+          <material>
+            <ambient>0.4 0.4 0.45 1</ambient>
+            <diffuse>0.5 0.5 0.55 1</diffuse>
+            <specular>0.3 0.3 0.3 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
         </visual>
         <collision name='collision'>
           <pose>0 0 0 0 -0 0</pose>
@@ -966,6 +1002,12 @@
           </geometry>
           <pose>0 0 0 0 -0 0</pose>
           <cast_shadows>1</cast_shadows>
+          <material>
+            <ambient>0.4 0.4 0.45 1</ambient>
+            <diffuse>0.5 0.5 0.55 1</diffuse>
+            <specular>0.3 0.3 0.3 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
         </visual>
         <collision name='collision'>
           <pose>0 0 0 0 -0 0</pose>
@@ -1009,6 +1051,12 @@
           </geometry>
           <pose>0 0 0 0 -0 0</pose>
           <cast_shadows>1</cast_shadows>
+          <material>
+            <ambient>0.4 0.4 0.45 1</ambient>
+            <diffuse>0.5 0.5 0.55 1</diffuse>
+            <specular>0.3 0.3 0.3 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
         </visual>
         <collision name='collision'>
           <pose>0 0 0 0 -0 0</pose>
@@ -1052,6 +1100,12 @@
           </geometry>
           <pose>0 0 0 0 -0 0</pose>
           <cast_shadows>1</cast_shadows>
+          <material>
+            <ambient>0.4 0.4 0.45 1</ambient>
+            <diffuse>0.5 0.5 0.55 1</diffuse>
+            <specular>0.3 0.3 0.3 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
         </visual>
         <collision name='collision'>
           <pose>0 0 0 0 -0 0</pose>
