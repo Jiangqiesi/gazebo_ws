@@ -1120,6 +1120,49 @@
       <static>0</static>
       <allow_auto_disable>1</allow_auto_disable>
     </model>
+    <model name='ship3'>
+      <pose>0.4 0.2 1.04 0 0 0</pose>
+      <link name='link'>
+        <inertial>
+          <pose>-0.000027 -0.006594 -0.002517 0 0 0</pose>
+          <mass>0.0630</mass>
+          <inertia>
+            <ixx>4.310223e-05</ixx>
+            <ixy>-1.080506e-09</ixy>
+            <ixz>6.891351e-10</ixz>
+            <iyy>3.109849e-05</iyy>
+            <iyz>-5.653268e-06</iyz>
+            <izz>2.354635e-05</izz>
+          </inertia>
+        </inertial>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+        <pose>0 0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file://gazebo/ship/ship3.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <pose>0 0 0 0 -0 0</pose>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>file://gazebo/ship/ship3.obj</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
     <gui fullscreen='0'>
       <camera name='user_camera'>
         <pose>3.30862 -1.2678 2.67857 0 0.574705 3.08818</pose>
