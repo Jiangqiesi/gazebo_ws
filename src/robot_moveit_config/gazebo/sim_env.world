@@ -702,24 +702,18 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file://gazebo/tooling_parts/g0101.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0101_obj.obj</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
           <pose>0 0 0 0 -0 0</pose>
           <cast_shadows>1</cast_shadows>
-          <material>
-            <ambient>0.4 0.4 0.45 1</ambient>
-            <diffuse>0.5 0.5 0.55 1</diffuse>
-            <specular>0.3 0.3 0.3 1</specular>
-            <emissive>0 0 0 1</emissive>
-          </material>
         </visual>
         <collision name='collision'>
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file://gazebo/tooling_parts/g0101.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0101_obj.obj</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -1162,6 +1156,98 @@
             <mesh>
               <uri>file://gazebo/ship/ship3.stl</uri>
               <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='cube'>
+      <pose>0.4 -0.2 1.04 0 0 0</pose>
+      <link name='link'>
+        <inertial>
+          <pose>0.037500 0.037500 0.037500 0 0 0</pose>
+          <mass>0.5062</mass>
+          <inertia>
+            <ixx>4.746094e-04</ixx>
+            <ixy>3.811648e-19</ixy>
+            <ixz>3.811648e-19</ixz>
+            <iyy>4.746094e-04</iyy>
+            <iyz>3.811648e-19</iyz>
+            <izz>4.746094e-04</izz>
+          </inertia>
+        </inertial>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+        <pose>0 0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file://gazebo/cube/cube.stl</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <pose>0 0 0 0 -0 0</pose>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>file://gazebo/cube/cube.stl</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+    </model>
+    <model name='g0102'>
+      <pose>0.6 -0.2 1.04 0 0 0</pose>
+      <link name='link'>
+        <inertial>
+          <pose>0.060000 0.059790 0.113809 0 0 0</pose>
+          <mass>0.3206</mass>
+          <inertia>
+            <ixx>3.952366e-04</ixx>
+            <ixy>2.493096e-10</ixy>
+            <ixz>4.452509e-11</ixz>
+            <iyy>3.774952e-04</iyy>
+            <iyz>7.563368e-07</iyz>
+            <izz>7.672021e-04</izz>
+          </inertia>
+        </inertial>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+        <pose>0 0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file://gazebo/tooling_parts/g0102.STL</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+          <pose>0 0 0 0 -0 0</pose>
+          <cast_shadows>1</cast_shadows>
+          <material>
+            <ambient>0.4 0.4 0.45 1</ambient>
+            <diffuse>0.5 0.5 0.55 1</diffuse>
+            <specular>0.3 0.3 0.3 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <collision name='collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>file://gazebo/tooling_parts/g0102.STL</uri>
+              <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
         </collision>
