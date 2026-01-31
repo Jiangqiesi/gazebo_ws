@@ -13,7 +13,7 @@ from launch.event_handlers import OnProcessExit
 from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration, Command
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch_ros.actions import Node, SetParameter
+from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 from ament_index_python.packages import get_package_share_directory
 from moveit_configs_utils import MoveItConfigsBuilder
@@ -65,12 +65,11 @@ def generate_launch_description():
     default_world = os.path.join(pkg_moveit_config, 'gazebo', 'sim_env.world')
     
     # Robot description for Gazebo
-    xacro_command = (
-        f'xacro {urdf_xacro} use_fake_hardware:=false use_gazebo:=true '
-        f'gazebo_controllers_file:={controllers_file}'
-    )
+    # Avoid flattening xacro output into a single line; it can break ros2_control parsing.
     robot_description_content = Command([
-        f"bash -c \"{xacro_command} | tr -d '\\n'\""
+        'xacro ', urdf_xacro,
+        ' use_fake_hardware:=false use_gazebo:=true ',
+        ' gazebo_controllers_file:=', controllers_file
     ])
 
     # Build MoveIt config
@@ -98,7 +97,7 @@ def generate_launch_description():
 
     # Override robot description with Gazebo-configured version
     robot_description = {
-        "robot_description": ParameterValue(robot_description_content, value_type=str)
+        "robot_description": ParameterValue(robot_description_content, value_type=None)
     }
 
     ld = LaunchDescription()
@@ -120,7 +119,7 @@ def generate_launch_description():
         description='Launch RViz'
     ))
 
-    ld.add_action(SetParameter(name='use_sim_time', value=True))
+    use_sim_time = LaunchConfiguration('use_sim_time')
 
     # Environment setup
     ld.add_action(set_model_database_uri)
@@ -153,7 +152,7 @@ def generate_launch_description():
         executable='robot_state_publisher',
         name='robot_state_publisher',
         output='screen',
-        parameters=[robot_description, {'use_sim_time': True}]
+        parameters=[robot_description, {'use_sim_time': use_sim_time}]
     ))
 
     # Spawn robot in Gazebo (delayed)
@@ -208,7 +207,7 @@ def generate_launch_description():
         moveit_config.trajectory_execution,
         robot_description_planning,
         octomap_params,
-        {'use_sim_time': True},
+        {'use_sim_time': use_sim_time},
     ]
     ld.add_action(Node(
         package='moveit_ros_move_group',
@@ -231,7 +230,7 @@ def generate_launch_description():
             moveit_config.planning_pipelines,
             moveit_config.robot_description_kinematics,
             robot_description_planning,
-            {'use_sim_time': True},
+            {'use_sim_time': use_sim_time},
         ],
         condition=IfCondition(LaunchConfiguration('use_rviz')),
     ))
