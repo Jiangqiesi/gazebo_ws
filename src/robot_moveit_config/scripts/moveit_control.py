@@ -65,7 +65,7 @@ def get_moveit_params():
     return params
 
 
-class RobotArmController:
+class RobotArmController(Node):
     """Controller for robot arm and gripper using MoveIt2 Python API."""
 
     def __init__(self):
@@ -82,43 +82,56 @@ class RobotArmController:
         # )
 
         # Build MoveIt config using the same pattern as gazebo_moveit.launch.py
-        moveit_config = (
-            MoveItConfigsBuilder(
-                robot_name="rm75_gripper_cameras",
-                package_name="robot_moveit_config"
+
+        # Initialize MoveIt2
+        try:
+
+            # Build MoveIt config using the same pattern as gazebo_moveit.launch.py
+            moveit_config = (
+                MoveItConfigsBuilder(
+                    robot_name="rm75_gripper_cameras",
+                    package_name="robot_moveit_config"
+                )
+                .robot_description()
+                .robot_description_semantic()
+                .robot_description_kinematics()
+                .moveit_cpp(
+                    file_path="config/motion_planning_python_api_tutorial.yaml"
+                )
+                .to_moveit_configs()
             )
-            .robot_description()
-            .robot_description_semantic()
-            .robot_description_kinematics()
-            .moveit_cpp(
-                file_path="config/motion_planning_python_api_tutorial.yaml"
+            config_dict = moveit_config.to_dict()
+            config_dict['use_sim_time'] = True 
+            # Ensure MoveItPy's internal node does not fail on invalid /clock QoS overrides.
+            config_dict['qos_overrides./clock.subscription.durability'] = 'system_default'
+            config_dict['qos_overrides./clock.subscription.history'] = 'keep_last'
+            config_dict['qos_overrides./clock.subscription.depth'] = 10
+            config_dict['qos_overrides./clock.subscription.reliability'] = 'reliable'
+
+            # Initialize MoveItPy
+            self.moveit = MoveItPy(
+                node_name="moveit_py_node",
+                config_dict=config_dict
             )
-            .to_moveit_configs()
-        )
-        config_dict = moveit_config.to_dict()
-        config_dict['use_sim_time'] = True 
-        # Ensure MoveItPy's internal node does not fail on invalid /clock QoS overrides.
-        config_dict['qos_overrides./clock.subscription.durability'] = 'system_default'
-        config_dict['qos_overrides./clock.subscription.history'] = 'keep_last'
-        config_dict['qos_overrides./clock.subscription.depth'] = 10
-        config_dict['qos_overrides./clock.subscription.reliability'] = 'reliable'
 
-        # Initialize MoveItPy
-        self.moveit = MoveItPy(
-            node_name="moveit_py_node",
-            config_dict=config_dict
-        )
+            # Planning group name for Gazebo simulation
+            self.group_name = "robot_arm"
+            self.arm = self.moveit.get_planning_component(self.group_name)
+            self.gripper_group_name = "robot_hand"
+            self.gripper = self.moveit.get_planning_component(self.gripper_group_name)
 
-        # Get planning components for arm and gripper
-        self.arm = self.moveit.get_planning_component("robot_arm")
-        self.gripper = self.moveit.get_planning_component("robot_hand")
+            # Planning scene monitor for reading current state/pose.
+            self.planning_scene_monitor = self.moveit.get_planning_scene_monitor()
 
-        # Get robot model and state
-        self.robot_model = self.moveit.get_robot_model()
-        self.planning_scene_monitor = self.moveit.get_planning_scene_monitor()
+            try:
+                self.planning_scene_monitor.wait_for_current_robot_state(2.0)
+            except Exception:
+                # Non-fatal: MoveItPy should still be able to plan/exe even if the wait fails.
+                pass
 
-        print("MoveIt2 Python controller initialized successfully!")
-        print(f"Robot model: {self.robot_model.name}")
+        except Exception as e:
+            raise
+
 
     def get_current_pose(self) -> PoseStamped:
         """Get the current pose of the end effector."""

@@ -16,3 +16,10 @@ install(DIRECTORY config DESTINATION share/${PROJECT_NAME})
 install(DIRECTORY gazebo DESTINATION share/${PROJECT_NAME})
 install(DIRECTORY worlds DESTINATION share/${PROJECT_NAME})
 install(FILES .setup_assistant DESTINATION share/${PROJECT_NAME})
+
+# --- add: install python scripts so `ros2 run` can find them ---
+install(
+  PROGRAMS
+    scripts/moveit_control.py
+  DESTINATION lib/${PROJECT_NAME}
+)
