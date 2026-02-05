@@ -792,7 +792,7 @@
       <pose>1.31846 1.48841 0.5 0 -0 0</pose>
     </model>
     <model name='g0101'>
-      <pose>0.6 0.25 0.91 0 0 0</pose>
+      <pose>0.6 0 0.91 0 0 0</pose>
       <link name='link'>
         <inertial>
           <pose>0.060839 0.060523 0.112492 0 0 0</pose>
@@ -832,9 +832,17 @@
           <surface>
             <friction>
               <ode>
-                <mu>3.0</mu>
-                <mu2>1.0</mu2>
+                <mu>100.0</mu>
+                <mu2>50.0</mu2>
               </ode>
+              <torsional>
+                <ode>
+                  <coefficient>1000.0</coefficient>
+                  <patch_radius>0.02</patch_radius>
+                  <surface_radius>0.02</surface_radius>
+                  <use_patch_radius>1</use_patch_radius>
+                </ode>
+              </torsional>
             </friction>
             <contact>
               <ode>
@@ -891,15 +899,23 @@
           <surface>
             <friction>
               <ode>
-                <mu>3.0</mu>
-                <mu2>1.0</mu2>
+                <mu>100.0</mu>
+                <mu2>50.0</mu2>
               </ode>
+              <torsional>
+                <ode>
+                  <coefficient>1000.0</coefficient>
+                  <patch_radius>0.02</patch_radius>
+                  <surface_radius>0.02</surface_radius>
+                  <use_patch_radius>1</use_patch_radius>
+                </ode>
+              </torsional>
             </friction>
             <contact>
               <ode>
                 <kp>1000000.0</kp>
                 <kd>100.0</kd>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00001</min_depth>
                 <max_vel>0.0</max_vel>
               </ode>
             </contact>
@@ -950,15 +966,23 @@
           <surface>
             <friction>
               <ode>
-                <mu>3.0</mu>
-                <mu2>1.0</mu2>
+                <mu>100.0</mu>
+                <mu2>50.0</mu2>
               </ode>
+              <torsional>
+                <ode>
+                  <coefficient>1000.0</coefficient>
+                  <patch_radius>0.02</patch_radius>
+                  <surface_radius>0.02</surface_radius>
+                  <use_patch_radius>1</use_patch_radius>
+                </ode>
+              </torsional>
             </friction>
             <contact>
               <ode>
                 <kp>1000000.0</kp>
                 <kd>100.0</kd>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00001</min_depth>
                 <max_vel>0.0</max_vel>
               </ode>
             </contact>
@@ -1009,12 +1033,12 @@
           <surface>
             <friction>
               <ode>
-                <mu>3.0</mu>
-                <mu2>1.0</mu2>
+                <mu>100.0</mu>
+                <mu2>50.0</mu2>
               </ode>
               <torsional>
                 <ode>
-                  <coefficient>10.0</coefficient>
+                  <coefficient>1000.0</coefficient>
                   <patch_radius>0.02</patch_radius>
                   <surface_radius>0.02</surface_radius>
                   <use_patch_radius>1</use_patch_radius>
@@ -1025,7 +1049,7 @@
               <ode>
                 <kp>1000000.0</kp>
                 <kd>100.0</kd>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00001</min_depth>
                 <max_vel>0.0</max_vel>
               </ode>
             </contact>
@@ -1076,12 +1100,12 @@
           <surface>
             <friction>
               <ode>
-                <mu>3.0</mu>
-                <mu2>1.0</mu2>
+                <mu>100.0</mu>
+                <mu2>50.0</mu2>
               </ode>
               <torsional>
                 <ode>
-                  <coefficient>10.0</coefficient>   <!-- 扭转摩擦系数，设为 1.0 到 10.0 之间 -->
+                  <coefficient>1000.0</coefficient>   <!-- 扭转摩擦系数，设为 1.0 到 10.0 之间 -->
                   <patch_radius>0.02</patch_radius> <!-- 接触面半径，设为工件大概的半径 (单位：米) -->
                   <surface_radius>0.02</surface_radius> <!-- 类似上面，保持一致 -->
                   <use_patch_radius>1</use_patch_radius> <!-- 强制使用上面的半径来计算 -->
@@ -1092,7 +1116,7 @@
               <ode>
                 <kp>1000000.0</kp>
                 <kd>100.0</kd>
-                <min_depth>0.001</min_depth>
+                <min_depth>0.00001</min_depth>
                 <max_vel>0.0</max_vel>
               </ode>
             </contact>
