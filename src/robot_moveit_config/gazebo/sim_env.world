@@ -792,7 +792,7 @@
       <pose>1.31846 1.48841 0.5 0 -0 0</pose>
     </model>
     <model name='g0101'>
-      <pose>0.6 0 0.91 0 0 0</pose>
+      <pose>0.6 0.25 0.91 0 0 0</pose>
       <link name='link'>
         <inertial>
           <pose>0.060839 0.060523 0.112492 0 0 0</pose>
