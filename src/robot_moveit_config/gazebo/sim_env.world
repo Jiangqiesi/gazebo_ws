@@ -623,6 +623,16 @@
       <real_time>22 839552368</real_time>
       <wall_time>1748240674 852462593</wall_time>
       <iterations>22632</iterations>
+      <model name='blue_box'>
+        <pose>0.699992 -0.55068 1.04 2e-06 -5e-06 8.7e-05</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0.699992 -0.55068 1.04 2e-06 -5e-06 8.7e-05</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0.037558 -0.037238 0.2523 1.50212 1.50233 -4.7e-05</acceleration>
+          <wrench>0.037558 -0.037238 0.2523 0 -0 0</wrench>
+        </link>
+      </model>
       <model name='building'>
         <pose>0.172106 -0.01584 0 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -679,8 +689,110 @@
         <pose>0 0 10 0 -0 0</pose>
       </light>
     </state>
+    <model name='blue_box'>
+      <link name='link'>
+        <inertial>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+        <pose>0 0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.05</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Blue</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+            <shader type='pixel'>
+              <normal_map>__default__</normal_map>
+            </shader>
+            <ambient>0 0 1 1</ambient>
+            <diffuse>0 0 1 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+          <pose>0 0 0 0 -0 0</pose>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.05</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>0 0 0</fdir1>
+                <slip1>0</slip1>
+                <slip2>0</slip2>
+              </ode>
+              <torsional>
+                <coefficient>1</coefficient>
+                <patch_radius>0</patch_radius>
+                <surface_radius>0</surface_radius>
+                <use_patch_radius>1</use_patch_radius>
+                <ode>
+                  <slip>0</slip>
+                </ode>
+              </torsional>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0</restitution_coefficient>
+              <threshold>1e+06</threshold>
+            </bounce>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+              <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
+              <collide_bitmask>1</collide_bitmask>
+              <ode>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+                <max_vel>0.01</max_vel>
+                <min_depth>0</min_depth>
+              </ode>
+              <bullet>
+                <split_impulse>1</split_impulse>
+                <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
+                <soft_cfm>0</soft_cfm>
+                <soft_erp>0.2</soft_erp>
+                <kp>1e+13</kp>
+                <kd>1</kd>
+              </bullet>
+            </contact>
+          </surface>
+        </collision>
+      </link>
+      <static>0</static>
+      <allow_auto_disable>1</allow_auto_disable>
+      <pose>1.31846 1.48841 0.5 0 -0 0</pose>
+    </model>
     <model name='g0101'>
-      <pose>0.6 0 1.04 0 0 0</pose>
+      <pose>0.6 0 0.91 0 0 0</pose>
       <link name='link'>
         <inertial>
           <pose>0.060839 0.060523 0.112492 0 0 0</pose>
@@ -738,268 +850,8 @@
       <static>0</static>
       <allow_auto_disable>1</allow_auto_disable>
     </model>
-    <model name='g0201'>
-      <pose>0.6 0 1.04 0 0 0</pose>
-      <link name='link'>
-        <inertial>
-          <pose>0.035839 0.111555 0.121577 0 0 0</pose>
-          <mass>0.0017</mass>
-          <inertia>
-            <ixx>3.445355e-08</ixx>
-            <ixy>5.947217e-14</ixy>
-            <ixz>2.858178e-16</ixz>
-            <iyy>3.490797e-08</iyy>
-            <iyz>1.747671e-16</iyz>
-            <izz>1.359738e-08</izz>
-          </inertia>
-        </inertial>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-        <pose>0 0 0 0 -0 0</pose>
-        <gravity>1</gravity>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file://gazebo/tooling_parts/g0201.STL</uri>
-              <scale>0.001 0.001 0.001</scale>
-            </mesh>
-          </geometry>
-          <pose>0 0 0 0 -0 0</pose>
-          <cast_shadows>1</cast_shadows>
-          <material>
-            <ambient>0.4 0.4 0.45 1</ambient>
-            <diffuse>0.5 0.5 0.55 1</diffuse>
-            <specular>0.3 0.3 0.3 1</specular>
-            <emissive>0 0 0 1</emissive>
-          </material>
-        </visual>
-        <collision name='collision'>
-          <pose>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>file://gazebo/tooling_parts/g0201.STL</uri>
-              <scale>0.001 0.001 0.001</scale>
-            </mesh>
-          </geometry>
-          <surface>
-            <friction>
-              <ode>
-                <mu>3.0</mu>
-                <mu2>1.0</mu2>
-              </ode>
-            </friction>
-            <contact>
-              <ode>
-                <kp>1000000.0</kp>
-                <kd>100.0</kd>
-                <min_depth>0.001</min_depth>
-                <max_vel>0.0</max_vel>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-      </link>
-      <static>0</static>
-      <allow_auto_disable>1</allow_auto_disable>
-    </model>
-    <model name='g0204'>
-      <pose>0.6 0 1.04 0 0 0</pose>
-      <link name='link'>
-        <inertial>
-          <pose>0.085839 0.111555 0.121577 0 0 0</pose>
-          <mass>0.0017</mass>
-          <inertia>
-            <ixx>3.445356e-08</ixx>
-            <ixy>5.915263e-14</ixy>
-            <ixz>8.103467e-16</ixz>
-            <iyy>3.490797e-08</iyy>
-            <iyz>1.863271e-16</iyz>
-            <izz>1.359738e-08</izz>
-          </inertia>
-        </inertial>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-        <pose>0 0 0 0 -0 0</pose>
-        <gravity>1</gravity>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file://gazebo/tooling_parts/g0204.STL</uri>
-              <scale>0.001 0.001 0.001</scale>
-            </mesh>
-          </geometry>
-          <pose>0 0 0 0 -0 0</pose>
-          <cast_shadows>1</cast_shadows>
-          <material>
-            <ambient>0.4 0.4 0.45 1</ambient>
-            <diffuse>0.5 0.5 0.55 1</diffuse>
-            <specular>0.3 0.3 0.3 1</specular>
-            <emissive>0 0 0 1</emissive>
-          </material>
-        </visual>
-        <collision name='collision'>
-          <pose>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>file://gazebo/tooling_parts/g0204.STL</uri>
-              <scale>0.001 0.001 0.001</scale>
-            </mesh>
-          </geometry>
-          <surface>
-            <friction>
-              <ode>
-                <mu>3.0</mu>
-                <mu2>1.0</mu2>
-              </ode>
-            </friction>
-            <contact>
-              <ode>
-                <kp>1000000.0</kp>
-                <kd>100.0</kd>
-                <min_depth>0.001</min_depth>
-                <max_vel>0.0</max_vel>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-      </link>
-      <static>0</static>
-      <allow_auto_disable>1</allow_auto_disable>
-    </model>
-    <model name='g0301'>
-      <pose>0.6 0 1.04 0 0 0</pose>
-      <link name='link'>
-        <inertial>
-          <pose>0.060839 0.060555 0.121975 0 0 0</pose>
-          <mass>0.0023</mass>
-          <inertia>
-            <ixx>5.419094e-08</ixx>
-            <ixy>1.259586e-16</ixy>
-            <ixz>-6.752853e-14</ixz>
-            <iyy>5.419094e-08</iyy>
-            <iyz>-2.256899e-13</iyz>
-            <izz>2.431805e-08</izz>
-          </inertia>
-        </inertial>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-        <pose>0 0 0 0 -0 0</pose>
-        <gravity>1</gravity>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file://gazebo/tooling_parts/g0301.STL</uri>
-              <scale>0.001 0.001 0.001</scale>
-            </mesh>
-          </geometry>
-          <pose>0 0 0 0 -0 0</pose>
-          <cast_shadows>1</cast_shadows>
-          <material>
-            <ambient>0.4 0.4 0.45 1</ambient>
-            <diffuse>0.5 0.5 0.55 1</diffuse>
-            <specular>0.3 0.3 0.3 1</specular>
-            <emissive>0 0 0 1</emissive>
-          </material>
-        </visual>
-        <collision name='collision'>
-          <pose>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>file://gazebo/tooling_parts/g0301.STL</uri>
-              <scale>0.001 0.001 0.001</scale>
-            </mesh>
-          </geometry>
-          <surface>
-            <friction>
-              <ode>
-                <mu>3.0</mu>
-                <mu2>1.0</mu2>
-              </ode>
-            </friction>
-            <contact>
-              <ode>
-                <kp>1000000.0</kp>
-                <kd>100.0</kd>
-                <min_depth>0.001</min_depth>
-                <max_vel>0.0</max_vel>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-      </link>
-      <static>0</static>
-      <allow_auto_disable>1</allow_auto_disable>
-    </model>
-    <model name='g0401'>
-      <pose>0.6 0 1.04 0 0 0</pose>
-      <link name='link'>
-        <inertial>
-          <pose>0.060839 0.009555 0.121940 0 0 0</pose>
-          <mass>0.0051</mass>
-          <inertia>
-            <ixx>1.162939e-07</ixx>
-            <ixy>2.096388e-13</ixy>
-            <ixz>8.919123e-16</ixz>
-            <iyy>2.088920e-07</iyy>
-            <iyz>2.539362e-16</iyz>
-            <izz>1.413710e-07</izz>
-          </inertia>
-        </inertial>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-        <pose>0 0 0 0 -0 0</pose>
-        <gravity>1</gravity>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>file://gazebo/tooling_parts/g0401.STL</uri>
-              <scale>0.001 0.001 0.001</scale>
-            </mesh>
-          </geometry>
-          <pose>0 0 0 0 -0 0</pose>
-          <cast_shadows>1</cast_shadows>
-          <material>
-            <ambient>0.4 0.4 0.45 1</ambient>
-            <diffuse>0.5 0.5 0.55 1</diffuse>
-            <specular>0.3 0.3 0.3 1</specular>
-            <emissive>0 0 0 1</emissive>
-          </material>
-        </visual>
-        <collision name='collision'>
-          <pose>0 0 0 0 -0 0</pose>
-          <geometry>
-            <mesh>
-              <uri>file://gazebo/tooling_parts/g0401.STL</uri>
-              <scale>0.001 0.001 0.001</scale>
-            </mesh>
-          </geometry>
-          <surface>
-            <friction>
-              <ode>
-                <mu>3.0</mu>
-                <mu2>1.0</mu2>
-              </ode>
-            </friction>
-            <contact>
-              <ode>
-                <kp>1000000.0</kp>
-                <kd>100.0</kd>
-                <min_depth>0.001</min_depth>
-                <max_vel>0.0</max_vel>
-              </ode>
-            </contact>
-          </surface>
-        </collision>
-      </link>
-      <static>0</static>
-      <allow_auto_disable>1</allow_auto_disable>
-    </model>
     <model name='g0601'>
-      <pose>0.6 0 1.04 0 0 0</pose>
+      <pose>0.6 0 0.91 0 0 0</pose>
       <link name='link'>
         <inertial>
           <pose>0.060839 0.060555 0.124000 0 0 0</pose>
@@ -1021,24 +873,18 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file://gazebo/tooling_parts/g0601.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0601_obj.obj</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
           <pose>0 0 0 0 -0 0</pose>
           <cast_shadows>1</cast_shadows>
-          <material>
-            <ambient>0.4 0.4 0.45 1</ambient>
-            <diffuse>0.5 0.5 0.55 1</diffuse>
-            <specular>0.3 0.3 0.3 1</specular>
-            <emissive>0 0 0 1</emissive>
-          </material>
         </visual>
         <collision name='collision'>
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file://gazebo/tooling_parts/g0601.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0601_obj.obj</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -1064,7 +910,7 @@
       <allow_auto_disable>1</allow_auto_disable>
     </model>
     <model name='g0701'>
-      <pose>0.6 0 1.04 0 0 0</pose>
+      <pose>0.6 0 0.91 0 0 0</pose>
       <link name='link'>
         <inertial>
           <pose>0.060839 0.009555 0.124000 0 0 0</pose>
@@ -1086,24 +932,18 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file://gazebo/tooling_parts/g0701.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0701_obj.obj</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
           <pose>0 0 0 0 -0 0</pose>
           <cast_shadows>1</cast_shadows>
-          <material>
-            <ambient>0.4 0.4 0.45 1</ambient>
-            <diffuse>0.5 0.5 0.55 1</diffuse>
-            <specular>0.3 0.3 0.3 1</specular>
-            <emissive>0 0 0 1</emissive>
-          </material>
         </visual>
         <collision name='collision'>
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file://gazebo/tooling_parts/g0701.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0701_obj.obj</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -1129,7 +969,7 @@
       <allow_auto_disable>1</allow_auto_disable>
     </model>
     <model name='g0801'>
-      <pose>0.6 0 1.04 0 0 0</pose>
+      <pose>0.6 0 0.91 0 0 0</pose>
       <link name='link'>
         <inertial>
           <pose>0.035839 0.111555 0.124000 0 0 0</pose>
@@ -1151,24 +991,18 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file://gazebo/tooling_parts/g0801.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0801_obj.obj</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
           <pose>0 0 0 0 -0 0</pose>
           <cast_shadows>1</cast_shadows>
-          <material>
-            <ambient>0.4 0.4 0.45 1</ambient>
-            <diffuse>0.5 0.5 0.55 1</diffuse>
-            <specular>0.3 0.3 0.3 1</specular>
-            <emissive>0 0 0 1</emissive>
-          </material>
         </visual>
         <collision name='collision'>
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file://gazebo/tooling_parts/g0801.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0801_obj.obj</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -1202,7 +1036,7 @@
       <allow_auto_disable>1</allow_auto_disable>
     </model>
     <model name='g0802'>
-      <pose>0.6 0 1.04 0 0 0</pose>
+      <pose>0.6 0 0.91 0 0 0</pose>
       <link name='link'>
         <inertial>
           <pose>0.085839 0.111555 0.124000 0 0 0</pose>
@@ -1224,24 +1058,18 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file://gazebo/tooling_parts/g0802.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0802_obj.obj</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
           <pose>0 0 0 0 -0 0</pose>
           <cast_shadows>1</cast_shadows>
-          <material>
-            <ambient>0.4 0.4 0.45 1</ambient>
-            <diffuse>0.5 0.5 0.55 1</diffuse>
-            <specular>0.3 0.3 0.3 1</specular>
-            <emissive>0 0 0 1</emissive>
-          </material>
         </visual>
         <collision name='collision'>
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file://gazebo/tooling_parts/g0802.STL</uri>
+              <uri>file://gazebo/tooling_parts/g0802_obj.obj</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -1275,7 +1103,7 @@
       <allow_auto_disable>1</allow_auto_disable>
     </model>
     <model name='ship3'>
-      <pose>0.4 0.2 1.04 0 0 0</pose>
+      <pose>0.4 0.5 1.04 0 0 0</pose>
       <link name='link'>
         <inertial>
           <pose>-0.000027 -0.006594 -0.002517 0 0 0</pose>
@@ -1324,7 +1152,7 @@
       <allow_auto_disable>1</allow_auto_disable>
     </model>
     <model name='cube'>
-      <pose>0.4 -0.2 1.04 0 0 0</pose>
+      <pose>0.4 -0.55 1.04 0 0 0</pose>
       <link name='link'>
         <inertial>
           <pose>0.037500 0.037500 0.037500 0 0 0</pose>
@@ -1346,7 +1174,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file://gazebo/cube/cube.stl</uri>
+              <uri>file://gazebo/cube/cube_1.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -1357,7 +1185,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file://gazebo/cube/cube.stl</uri>
+              <uri>file://gazebo/cube/cube_1.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -1367,7 +1195,7 @@
       <allow_auto_disable>1</allow_auto_disable>
     </model>
     <model name='g0102'>
-      <pose>0.6 -0.2 1.04 0 0 0</pose>
+      <pose>0.6 -0.5 1.04 0 0 0</pose>
       <link name='link'>
         <inertial>
           <pose>0.060000 0.059790 0.113809 0 0 0</pose>
@@ -1422,5 +1250,6 @@
         <projection_type>perspective</projection_type>
       </camera>
     </gui>
+    <plugin name="gazebo_link_attacher" filename="libgazebo_link_attacher.so"/>
   </world>
 </sdf>
